@@ -8,32 +8,36 @@ class Auth {
         }
     }
 
-    public static function requireLogin(): array {
+        public static function requireLogin(): array {
         self::startSession();
-
+        
         if (empty($_SESSION['user'])) {
-            header('Location: login.php');
+            header('Location: /DMS-allen/DMS-allen/login.php');
             exit;
         }
-
+        
         return $_SESSION['user'];
     }
+
 
     public static function currentUser(): ?array {
         self::startSession();
         return $_SESSION['user'] ?? null;
     }
 
-    public static function requireRole(string ...$roles): array {
+        public static function requireRole(string ...$roles): array {
         $user = self::requireLogin();
 
-        if (!in_array($user['role'], $roles, true)) {
-            http_response_code(403);
-            die('<p style="color:red">Access denied.</p>');
+        // Check if the logged-in user's role exists inside your permitted roles array
+        if (!$user || !in_array($user['role'], $roles, true)) {
+            // Force a clean absolute redirect straight back to the login screen
+            header('Location: /DMS-allen/DMS-allen/login.php');
+            exit;
         }
 
         return $user;
     }
+
 }
 
 function require_login(): array {

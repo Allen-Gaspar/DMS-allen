@@ -1,10 +1,25 @@
 <?php
-/**
- * admin/admin_dashboard.php — Dedicated Workspace Dashboard for Admins.
- */
+
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path'     => '/DMS-allen/DMS-allen/',
+        'secure'   => false,
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+    session_start();
+}
+
+
 require_once __DIR__ . '/../auth.php';
-$user = require_role('admin');
-$db   = get_db();
+$user = require_role('admin'); // Make sure this runs AFTER the session scope is active!
+$db = get_db();
+
 
 // Fetch Admin Stats
 $stats = [];
