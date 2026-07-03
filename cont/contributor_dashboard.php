@@ -63,6 +63,6 @@ include __DIR__ . '/../partials/header.php';
   </form>
 </div>
 
-<p><a href="documents.php" class="btn btn-outline">View All Documents &rarr;</a></p>
+<p><a href="../documents.php" class="btn btn-outline">View All Documents &rarr;</a></p>
 
 <?php include __DIR__ . '/../partials/footer.php'; ?>

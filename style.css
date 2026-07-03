@@ -543,23 +543,63 @@ body.skin-login {
     font-size: 1.5rem;
   }
 
-  .landing-nav {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-
-  .landing-nav a:not(.btn) {
-    text-decoration: none;
-    color: var(--text-muted);
+/* --- Base Navigation Link Style Configuration --- */
+.landing-nav .nav-link {
+    position: relative !important;   /* Locks the bounding box container to the word */
+    display: inline-block;
+    text-decoration: none !important;
+    color: var(--text-muted, #333333);
     font-weight: 500;
     font-size: 0.95rem;
-    transition: var(--transition);
-  }
+    padding: 8px 16px;
+    background: none !important;
+    border: none !important;
+    transition: color 0.3s ease;
+}
 
-  .landing-nav a:not(.btn):hover {
-    color: var(--primary);
-  }
+/* Link Text Color Hover & Active Indication Highlight State */
+.landing-nav .nav-link:hover,
+.landing-nav .nav-link.active {
+    color: var(--primary, #4CAF50) !important;
+}
+
+/* --- Centered Underline Component Base Layout --- */
+.landing-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;                    /* Floats the bar cleanly right below the text baseline */
+    left: 50%;                       /* Anchors the starting point exactly in the middle of the word */
+    width: 0;
+    height: 2px;
+    background-color: var(--primary, #4CAF50);
+    transform: translateX(-50%);     /* Centers the underline dynamically relative to the text length */
+    transition: width 0.3s ease;     /* Animates the width growing cleanly outward from the center */
+}
+
+/* Hover & Active Indication State: Expands width symmetrically outwards from the center */
+.landing-nav .nav-link:hover::after,
+.landing-nav .nav-link.active::after {
+    width: 80% !important;           /* Clean padding: extends to underline 80% of the word width */
+}
+
+/* --- Exclusion Overrides For The Main Login Button Layout Box --- */
+.landing-nav .login-btn {
+    border: 1px solid var(--primary, #4CAF50) !important; /* Preserves your theme stroke ring outline box */
+    border-radius: 4px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.landing-nav .login-btn:hover {
+    background-color: var(--primary, #4CAF50) !important;
+    color: #ffffff !important;
+}
+
+/* Completely disables the green line element from appearing under your Login button container */
+.landing-nav .login-btn::after {
+    display: none !important;
+}
+
 
   .btn {
     display: inline-flex;
@@ -595,7 +635,6 @@ body.skin-login {
   .btn-outline:hover {
     background-color: var(--bg-white);
     border-color: var(--text-main);
-    transform: translateY(-1px);
   }
 
   .landing-hero {
@@ -1030,3 +1069,4 @@ body.skin-login {
   outline: none;
   border-color: var(--primary);
 }
+
