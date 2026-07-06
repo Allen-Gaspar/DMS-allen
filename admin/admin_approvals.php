@@ -241,7 +241,7 @@ include __DIR__ . '/../partials/header.php';
       <?php if (empty($pending_list)): ?>
         <tr>
             <td colspan="5" style="text-align:center; padding:30px; color:#888; font-style: italic;">
-                No pending workspace access requests found in queue database records.
+                No pending access account creation.
             </td>
         </tr>
       <?php else: ?>

@@ -26,7 +26,7 @@ function context_redirect($message_type, $message_text) {
 $allowed_actions = ['checkout', 'checkin', 'get_history', 'silent_lock', 'silent_unlock', 'commit_revision', 'rollback'];
 
 if (!in_array($action, $allowed_actions, true)) {
-    context_redirect('err', 'Invalid version control request action.');
+    context_redirect('err', 'Invalid request .');
 }
 
 // ── 1. API FETCH: GET HISTORY LOGGER BACKLOG ───────────────────────────
@@ -70,7 +70,7 @@ if ($action === 'commit_revision' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $doc_id = (int)($_POST['document_id'] ?? 0);
     
     if ($doc_id <= 0 || !isset($_FILES['revised_document']) || $_FILES['revised_document']['error'] !== UPLOAD_ERR_OK) {
-        context_redirect('err', 'No valid revision payload file received.');
+        context_redirect('err', 'No valid file received.');
     }
 
     // Fetch existing active file details to back it up before overwriting
@@ -102,9 +102,9 @@ if ($action === 'commit_revision' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $up_stmt->execute();
 
         audit_log($user['id'], 'VERSION_BUMP', "Committed file revision for '{$current_doc['filename']}' — now version v{$next_version}");
-        context_redirect('ok', "New revision file committed successfully as Version v" . $next_version);
+        context_redirect('ok', "New update file successfully as Version v" . $next_version);
     }
-    context_redirect('err', 'Failed to store revision payload file. Check directory permissions.');
+    context_redirect('err', 'Failed to store update file. Check directory permissions.');
 }
 
 // ── 5. GET ACTION: OPERATE HISTORICAL CHECKPOINT REGRESSION ROLLBACK ────

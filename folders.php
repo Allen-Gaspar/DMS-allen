@@ -532,7 +532,7 @@ include __DIR__ . '/partials/header.php';
 
             <!-- SECTION 3: ADVANCED ACCESS MATRIX -->
             <div style="border-top: 1px solid #f1f5f9; padding-top: 15px;">
-                <h4 style="margin: 0 0 12px 0; font-size: 13px; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold;">3. Collaborative Access Shares Matrix</h4>
+                <h4 style="margin: 0 0 12px 0; font-size: 13px; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold;">3. Collaborative Access Shares</h4>
                 
                 <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;">
@@ -552,16 +552,16 @@ include __DIR__ . '/partials/header.php';
                         <label style="font-size: 13px; color: #334155; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" class="m-perm-cb" id="p_checkout" value="1"> Can Lock/Unlock</label>
                     </div>
 
-                    <button type="button" class="btn btn-secondary" style="width: 100%; font-weight: bold; padding: 10px; border-radius: 6px; font-size: 13px; cursor: pointer;" onclick="stageDirectAccessPermissionRow()">Grant User Access Scope</button>
+                    <button type="button" class="btn btn-secondary" style="width: 100%; font-weight: bold; padding: 10px; border-radius: 6px; font-size: 13px; cursor: pointer;" onclick="stageDirectAccessPermissionRow()">Grant User Access</button>
                     
                     <div style="margin-top: 10px;">
-                        <strong style="font-size: 11px; color: #64748b; text-transform: uppercase;">Staged Shares Deployment Queue:</strong>
+                        <strong style="font-size: 11px; color: #64748b; text-transform: uppercase;">Share:</strong>
                         <table class="staged-list-table" id="m_staged_shares_table">
                             <thead>
-                                <tr><th>Collaborator</th><th>Role</th><th>Capabilities Mapping Grid</th><th>Remove</th></tr>
+                                <tr><th>Collaborator</th><th>Role</th><th>Capabilities</th><th>Remove</th></tr>
                             </thead>
                             <tbody id="m_staged_shares_tbody">
-                                <tr><td colspan="4" style="text-align:center; color:#aaa; font-style:italic;">No changes staged. Existing database permissions will remain active.</td></tr>
+                                <tr><td colspan="4" style="text-align:center; color:#aaa; font-style:italic;">No existing update.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -570,8 +570,8 @@ include __DIR__ . '/partials/header.php';
 
             <!-- UNIFIED SUBMIT FOOTER -->
             <div style="border-top: 2px solid #e2e8f0; padding-top: 20px; display: flex; justify-content: flex-end; gap: 12px; margin-top: 15px;">
-                <button type="button" onclick="closeMasterEditModal()" style="background: #e2e8f0; border: none; color: #334155; padding: 12px 25px; border-radius: 6px; font-weight: bold; cursor: pointer; font-family: sans-serif;">Cancel Layout</button>
-                <button type="submit" style="background: #16a34a; border: none; color: #fff; padding: 12px 35px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 4px 6px rgba(22,163,74,0.2); font-family: sans-serif;" onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">Master Update Changes & Permissions →</button>
+                <button type="button" onclick="closeMasterEditModal()" style="background: #e2e8f0; border: none; color: #334155; padding: 12px 25px; border-radius: 6px; font-weight: bold; cursor: pointer; font-family: sans-serif;">Cancel Updates</button>
+                <button type="submit" style="background: #16a34a; border: none; color: #fff; padding: 12px 35px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 4px 6px rgba(22,163,74,0.2); font-family: sans-serif;" onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">Update Changes & Permissions →</button>
             </div>
         </div>
     </form>
@@ -827,7 +827,7 @@ function removeStagedPermissionRow(userId) {
 function renderStagedSharingQueueTable() {
     const tbody = document.getElementById('m_staged_shares_tbody');
     if (localStagedSharingMatrix.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#aaa; font-style:italic;">No changes staged. Existing database permissions will remain active.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#aaa; font-style:italic;">No existing update.</td></tr>`;
         return;
     }
     
@@ -868,7 +868,7 @@ function executeMasterStagingSubmission(event) {
 
     fetch(actionTargetUrl, { method: 'POST', body: formData })
     .then(res => {
-        const encodedMsg = encodeURIComponent('Workspace parameters and custom document access metrics synced successfully!');
+        const encodedMsg = encodeURIComponent('Update successfully!');
         window.location.href = 'folders.php?id=<?= $current_folder_id ?>&ok=' + encodedMsg;
     }).catch(() => alert('Network asset allocation system sync exception error loop.'));
 }

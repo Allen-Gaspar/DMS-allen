@@ -246,7 +246,7 @@ include __DIR__ . '/partials/header.php';
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 10px; font-weight: bold;">Execute Master File Upload Pipeline</button>
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 10px; font-weight: bold;">Save Changes</button>
         </form>
     </div>
 

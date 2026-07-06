@@ -274,8 +274,8 @@ include __DIR__ . '/partials/header.php';
                   <div id="p_old" class="preview-box-split"></div>
                 </div>
                 <div>
-                  <small style="color: #64748b; font-weight: bold; display: block; margin-bottom: 4px; text-transform: uppercase; font-size: 11px;">New Revision Preview</small>
-                  <div id="p_new" class="preview-box-split" style="color: #94a3b8; font-size: 12px; font-style: italic; text-align: center;">No payload staged.</div>
+                  <small style="color: #64748b; font-weight: bold; display: block; margin-bottom: 4px; text-transform: uppercase; font-size: 11px;">New Preview</small>
+                  <div id="p_new" class="preview-box-split" style="color: #94a3b8; font-size: 12px; font-style: italic; text-align: center;">No preview yet.</div>
                 </div>
             </div>
 
@@ -296,7 +296,7 @@ include __DIR__ . '/partials/header.php';
             <div id="m_history_list" style="max-height: 160px; overflow-y: auto; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 8px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);"></div>
         </div>
 
-        <!-- SECTION 3: ADVANCED ACCESS MATRIX / COLLABORATION ASSIGNMENT -->
+        <!-- SECTION 3: ADVANCED ACCESS MATRIX / COLLABORATION ASSIGNMENT
         <div style="border-top: 1px solid #f1f5f9; padding-top: 15px;">
             <h4 style="margin: 0 0 12px 0; font-size: 13px; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold;">3. Collaborative Access Shares</h4>
             
@@ -312,10 +312,10 @@ include __DIR__ . '/partials/header.php';
                     <label style="font-size: 12px; color: #0284c7; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 4px;">
                         <input type="checkbox" id="m_select_all_perms" onclick="document.querySelectorAll('.m-perm-cb').forEach(cb => cb.checked = this.checked)" style="cursor: pointer; width: 15px; height: 15px; margin: 0;"> Select All Permissions
                     </label>
-                </div>
+                </div> -->
 
                 <!-- Granular Permissions Checklist Row -->
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 5px 0;">
+                <!-- <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 5px 0;">
                     <label style="font-size: 13px; color: #334155; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" class="m-perm-cb" id="p_edit" value="1" style="width: 16px; height: 16px;"> Can Edit</label>
                     <label style="font-size: 13px; color: #334155; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" class="m-perm-cb" id="p_delete" value="1" style="width: 16px; height: 16px;"> Can Delete</label>
                     <label style="font-size: 13px; color: #334155; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" class="m-perm-cb" id="p_download" value="1" checked style="width: 16px; height: 16px;"> Can Download</label>
@@ -324,7 +324,7 @@ include __DIR__ . '/partials/header.php';
 
                 <button type="button" class="btn btn-secondary" style="width: 100%; font-weight: bold; padding: 10px; border-radius: 6px; font-size: 13px; cursor: pointer;" onclick="submitNewAccessAssignmentRow()">Grant Access</button>
             </div>
-        </div>
+        </div> -->
 
     </div>
   </div>
@@ -361,7 +361,7 @@ function openMasterEditModal(doc) {
     .then(versions => {
         historyList.innerHTML = '';
         if (versions.length === 0) {
-            historyList.innerHTML = '<small style="color: #94a3b8; text-align: center; font-style: italic; display: block; padding: 10px;">No historical revisions recorded.</small>';
+            historyList.innerHTML = '<small style="color: #94a3b8; text-align: center; font-style: italic; display: block; padding: 10px;">No history update recorded.</small>';
             return;
         }
         versions.forEach(v => {
@@ -404,7 +404,7 @@ function renderCompareViewDelta(input) {
             };
             reader.readAsDataURL(file);
         } else {
-            pane.innerHTML = `<div style="text-align: center; font-size: 12px; padding: 10px;">📄 <strong style="display: block; word-break: break-all; margin-top: 4px;">${file.name}</strong><small style="color: #16a34a; font-weight: bold; display: block; margin-top: 4px;">🔄 Staged & Ready to Commit</small></div>`;
+            pane.innerHTML = `<div style="text-align: center; font-size: 12px; padding: 10px;">📄 <strong style="display: block; word-break: break-all; margin-top: 4px;">${file.name}</strong><small style="color: #16a34a; font-weight: bold; display: block; margin-top: 4px;">Ready to Update</small></div>`;
         }
     }
 }
@@ -433,14 +433,14 @@ function submitNewAccessAssignmentRow() {
     .then(res => res.json())
     .then(data => {
         if (data.success) {
-            alert('Access permissions matrix mapped successfully!');
+            alert('Access permissions successfully!');
             document.getElementById('m_collab_picker').value = '';
             document.getElementById('m_select_all_perms').checked = false;
             document.querySelectorAll('.m-perm-cb').forEach(cb => cb.checked = cb.id === 'p_download');
         } else { 
-            alert('Access Assignment Error: ' + data.message); 
+            alert('Access Error: ' + data.message); 
         }
-    }).catch(() => alert('Network asset allocation failure.'));
+    }).catch(() => alert('Error Updating.'));
 }
 
 window.addEventListener('click', function(e) {

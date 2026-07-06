@@ -205,12 +205,12 @@ include __DIR__ . '/partials/header.php';
 
 <div class="search-container">
   <div class="search-box">
-    <label for="folderSearchInput">Folder Content Filter</label>
-    <input type="text" id="folderSearchInput" placeholder="🔍 Type to filter current visible block cards..." autocomplete="off">
+    <label for="folderSearchInput">Folder Content</label>
+    <input type="text" id="folderSearchInput" placeholder="Type to filter folders..." autocomplete="off">
   </div>
   <div class="search-box">
-    <label for="fileSearchInput">Live Document Index Search</label>
-    <input type="text" id="fileSearchInput" placeholder="📝 Type a filename to search with instant suggestions..." autocomplete="off">
+    <label for="fileSearchInput">Search File Inside Folder</label>
+    <input type="text" id="fileSearchInput" placeholder="Type to filter files inside folder..." autocomplete="off">
     <div id="suggestionDropdown" class="suggestion-dropdown"></div>
   </div>
 </div>
